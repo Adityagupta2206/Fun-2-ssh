@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <title>Fun 2 ssh</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="" name="keywords">
+        <meta content="" name="description">
+
+        <!-- Google Web Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wdth,wght@0,75..100,300..800;1,75..100,300..800&display=swap" rel="stylesheet"> 
+
+        <!-- Icon Font Stylesheet -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+        <!-- Libraries Stylesheet -->
+        <link href="lib/animate/animate.min.css" rel="stylesheet">
+        <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+        <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+
+        <!-- Customized Bootstrap Stylesheet -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Template Stylesheet -->
+        <link href="css/style.css" rel="stylesheet">
+    </head>
+
+    <body>
+
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+
+        <!-- Navbar & Hero Start -->
+        <div class="container-fluid nav-bar sticky-top px-4 py-2 py-lg-0">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <a href="" class="navbar-brand p-0">
+                    <h1 class="display-6 text-dark"><i class="fas fa-umbrella text-primary me-3"></i>Fun 2 ssh</h1>
+                    <!-- <img src="img/logo.png" alt="Logo"> -->
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="fa fa-bars"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav mx-auto py-0">
+                        <a href="index.html" class="nav-item nav-link active">Home</a>
+                        <a href="about.html" class="nav-item nav-link">About</a>
+                        <a href="service.html" class="nav-item nav-link">Service</a>
+                        <a href="blog.html" class="nav-item nav-link">Blog</a>
+                        <a href="book.html" class="nav-item nav-link">Book</a>
+                        
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                            <div class="dropdown-menu m-0">
+                                <a href="feature.html" class="dropdown-item">Our Feature</a>
+                                <a href="gallery.html" class="dropdown-item">Our Gallery</a>
+                                <a href="attraction.html" class="dropdown-item">Attractions</a>
+                                <a href="package.html" class="dropdown-item">Ticket Packages</a>
+                                <a href="team.html" class="dropdown-item">Our Team</a>
+                                <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                               
+                            </div>
+                        </div>
+                        <a href="contact.html" class="nav-item nav-link">Contact</a>
+                    </div>
+                   
+                </div>
+            </nav>
+        </div>
+        <!-- Navbar & Hero End -->
+
+        <!-- Carousel Start -->
+        <div class="header-carousel owl-carousel">
+            <div class="header-carousel-item">
+                <img src="img/carousel-1.jpg" class="img-fluid w-100" alt="Image">
+                <div class="carousel-caption">
+                    <div class="container align-items-center py-4">
+                        <div class="row g-5 align-items-center">
+                            <div class="col-xl-7 fadeInLeft animated" data-animation="fadeInLeft" data-delay="1s" style="animation-delay: 1s;">
+                                <div class="text-start">
+                                    <h4 class="text-primary text-uppercase fw-bold mb-4">Welcome To Fun 2 ssh</h4>
+                                    <h1 class="display-4 text-uppercase text-white mb-4">The Biggest Theme & Amusement Park</h1>
+                                    <p class="mb-4 fs-5"></p>
+                                    <div class="d-flex flex-shrink-0">
+                                        <a class="btn btn-primary rounded-pill text-white py-3 px-5" href="#">Our Packages</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-5 fadeInRight animated" data-animation="fadeInRight" data-delay="1s" style="animation-delay: 1s;">
+                                <div class="ticket-form p-5">
+                                    <h2 class="text-dark text-uppercase mb-4">Book Your Ticket</h2>
+                                    <form id="bookingForm">
+                                        <div class="row g-4">
+                                            <div class="col-12">
+                                                <input type="text" class="form-control border-0 py-2" id="name" name="name" placeholder="Your Name" required>
+                                            </div>
+                                            <div class="col-12 col-xl-6">
+                                                <input type="email" class="form-control border-0 py-2" id="email" name="email" placeholder="Your Email" required>
+                                            </div>
+                                            <div class="col-12 col-xl-6">
+                                                <input type="tel" class="form-control border-0 py-2" id="phone" name="phone" placeholder="Phone" required>
+                                            </div>
+                                            <div class="col-12">
+                                                <select class="form-select border-0 py-2" id="package" name="package" required>
+                                                    <option value="" disabled selected>Select Packages</option>
+                                                    <option value="Family Packages">Family Packages</option>
+                                                    <option value="Basic Packages">Basic Packages</option>
+                                                    <option value="Premium Packages">Premium Packages</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-12">
+                                                <input type="date" class="form-control border-0 py-2" id="date" name="date" required>
+                                            </div>
+                                            <div class="col-12">
+                                                <input type="number" class="form-control border-0 py-2" id="guest" name="guest" placeholder="Number of Guests" required>
+                                            </div>
+                                            <div class="col-12">
+                                                <button type="submit" class="btn btn-primary w-100 py-2 px-5">Book Now</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        <!-- Carousel End -->
+
+
+
+        <!-- Ticket Packages Start -->
+        <div class="container-fluid py-5">
+            <div class="container py-5">
+                <div class="row g-5 align-items-center">
+                    <div class="col-lg-12 col-xl-4 wow fadeInUp" data-wow-delay="0.2s">
+                        <div class="packages-item h-100">
+                            <h4 class="text-primary">Ticket Packages</h4>
+                            <h1 class="display-5 mb-4">Choose The Best Packages For Your Family</h1>
+                            <p class="mb-4">Discover the perfect package for your family and make the most of your visit to our waterpark. With options tailored to suit all needs, you can enjoy a seamless and memorable experience.
+
+                            </p>
+                            <p><i class="fa fa-check text-primary me-2"></i>Best Waterpark in the world</p>
+                            <p><i class="fa fa-check text-primary me-2"></i>Best Packages For Your Family</p>
+                            <p><i class="fa fa-check text-primary me-2"></i>Enjoy Various Kinds of Water Park</p>
+                            <p class="mb-5"><i class="fa fa-check text-primary me-2"></i>Win Up To 3 Free All Day Tickets</p>
+                            <a href="package.html" class="btn btn-primary rounded-pill py-3 px-5"> Book Now</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-xl-4 wow fadeInUp" data-wow-delay="0.4s">
+                        <div class="pricing-item bg-dark rounded text-center p-5 h-100">
+                            <div class="pb-4 border-bottom">
+                                <h2 class="mb-4 text-primary">Family Packages</h2>
+                                <p class="mb-4"></p>
+                                <h2 class="mb-0 text-primary">$260,90<span class="text-body fs-5 fw-normal">/family</span></h2>
+                            </div>
+                            <div class="py-4">
+                                <p class="mb-4"><i class="fa fa-check text-primary me-2"></i>All Access To Waterpark</p>
+                                <p class="mb-4"><i class="fa fa-check text-primary me-2"></i>Get Two Gazebo</p>
+                                <p class="mb-4"><i class="fa fa-check text-primary me-2"></i>Free Soft Drinks</p>
+                                <p class="mb-4"><i class="fa fa-check text-primary me-2"></i>Get Four Lockers</p>
+                                <p class="mb-4"><i class="fa fa-check text-primary me-2"></i>Free Four Towels</p>
+                            </div>
+                            <a href="package.html" class="btn btn-light rounded-pill py-3 px-5"> Book Now</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-xl-4 wow fadeInUp" data-wow-delay="0.6s">
+                        <div class="pricing-item bg-primary rounded text-center p-5 h-100">
+                            <div class="pb-4 border-bottom">
+                                <h2 class="text-dark mb-4">Basic Packages</h2>
+                                <p class="text-white mb-4"></p>
+                                <h2 class="text-dark mb-0">$60,90<span class="text-white fs-5 fw-normal">/person</span></h2>
+                            </div>
+                            <div class="text-white py-4">
+                                <p class="mb-4"><i class="fa fa-check text-dark me-2"></i>Get Small Gazebo</p>
+                                <p class="mb-4"><i class="fa fa-check text-dark me-2"></i>Free Soft Drink</p>
+                                <p class="mb-4"><i class="fa fa-check text-dark me-2"></i>Get One Locker</p>
+                                <p class="mb-4"><i class="fa fa-check text-dark me-2"></i>Free Towel</p>
+                            </div>
+                            <a href="package.html" class="btn btn-dark rounded-pill py-3 px-5"> Book Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Ticket Packages End -->
+
+
+        <!-- Attractions Start -->
+        <div class="container-fluid attractions py-5">
+            <div class="container attractions-section py-5">
+                <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
+                    <h4 class="text-primary">Attractions</h4>
+                    <h1 class="display-5 text-white mb-4">Explore Fun 2 ssh Park Attractions</h1>
+                    <p class="text-white mb-0"></p>
+                </div>
+                <div class="owl-carousel attractions-carousel wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="attractions-item wow fadeInUp" data-wow-delay="0.2s">
+                        <img src="img/attraction-1.jpg" class="img-fluid rounded w-100" alt="">
+                        <a href="#" class="attractions-name">Roller Coaster</a>
+                    </div>
+                    <div class="attractions-item wow fadeInUp" data-wow-delay="0.4s">
+                        <img src="img/attraction-2.jpg" class="img-fluid rounded w-100" alt="">
+                        <a href="#" class="attractions-name">Carousel</a>
+                    </div>
+                    <div class="attractions-item wow fadeInUp" data-wow-delay="0.6s">
+                        <img src="img/attraction-3.jpg" class="img-fluid rounded w-100" alt="">
+                        <a href="#" class="attractions-name">Arcade Game</a>
+                    </div>
+                    <div class="attractions-item wow fadeInUp" data-wow-delay="0.8s">
+                        <img src="img/attraction-4.jpg" class="img-fluid rounded w-100" alt="">
+                        <a href="#" class="attractions-name">Hanging Carousel</a>
+                    </div>
+                    <div class="attractions-item wow fadeInUp" data-wow-delay="1s">
+                        <img src="img/attraction-2.jpg" class="img-fluid rounded w-100" alt="">
+                        <a href="#" class="attractions-name">Carousel</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Ticket Packages End -->
+
+
+
+        <!-- Footer Start -->
+        <div class="container-fluid footer py-5 wow fadeIn" data-wow-delay="0.2s">
+            <div class="container py-5">
+                <div class="row g-5">
+                    <div class="col-md-6 col-lg-6 col-xl-4">
+                        <div class="footer-item">
+                            <a href="index.html" class="p-0">
+                                <h4 class="text-white mb-4"><i class="fas fa-swimmer text-primary me-3"></i>Fun 2 ssh</h4>
+                                <!-- <img src="img/logo.png" alt="Logo"> -->
+                            </a>
+                            <p class="mb-2"></p>
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-map-marker-alt text-primary me-3"></i>
+                                <p class="text-white mb-0">123 Street New York.USA</p>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-envelope text-primary me-3"></i>
+                                <p class="text-white mb-0">info@example.com</p>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <i class="fa fa-phone-alt text-primary me-3"></i>
+                                <p class="text-white mb-0">(+012) 3456 7890</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-6 col-xl-2">
+                        <div class="footer-item">
+                            <h4 class="text-white mb-4">Quick Links</h4>
+                            <a href="about.html"><i class="fas fa-angle-right me-2"></i> About Us</a>
+                            <a href="feature.html"><i class="fas fa-angle-right me-2"></i> Feature</a>
+                            <a href="attraction.html"><i class="fas fa-angle-right me-2"></i> Attractions</a>
+                            <a href="book.html"><i class="fas fa-angle-right me-2"></i> Tickets</a>
+                            <a href="blog.html"><i class="fas fa-angle-right me-2"></i> Blog</a>
+                            <a href="contact.html"><i class="fas fa-angle-right me-2"></i> Contact us</a>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-6 col-xl-2">
+                        <div class="footer-item">
+                            <h4 class="text-white mb-4">Support</h4>
+                            <a href="error.html"><i class="fas fa-angle-right me-2"></i> Privacy Policy</a>
+                            <a href="error.html"><i class="fas fa-angle-right me-2"></i> Terms & Conditions</a>
+                            <a href="error.html"><i class="fas fa-angle-right me-2"></i> Disclaimer</a>
+                            <a href="error.html"><i class="fas fa-angle-right me-2"></i> Support</a>
+                            <a href="error.html"><i class="fas fa-angle-right me-2"></i> FAQ</a>
+                            <a href="error.html"><i class="fas fa-angle-right me-2"></i> Help</a>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-6 col-xl-4">
+                        <div class="footer-item">
+                            <h4 class="text-white mb-4">Opening Hours</h4>
+                            <div class="opening-date mb-3 pb-3">
+                                <div class="opening-clock flex-shrink-0">
+                                    <h6 class="text-white mb-0 me-auto">Monday - Friday:</h6>
+                                    <p class="mb-0"><i class="fas fa-clock text-primary me-2"></i> 11:00 AM - 16:00 PM</p>
+                                </div>
+                                <div class="opening-clock flex-shrink-0">
+                                    <h6 class="text-white mb-0 me-auto">Satur - Sunday:</h6>
+                                    <p class="mb-0"><i class="fas fa-clock text-primary me-2"></i> 09:00 AM - 17:00 PM</p>
+                                </div>
+                                <div class="opening-clock flex-shrink-0">
+                                    <h6 class="text-white mb-0 me-auto">Holiday:</h6>
+                                    <p class="mb-0"><i class="fas fa-clock text-primary me-2"></i> 09:00 AM - 17:00 PM</p>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="text-white mb-2">Payment Accepted</p>
+                                <img src="img/payment.png" class="img-fluid" alt="Image">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+        
+       
+
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-primary btn-lg-square rounded-circle back-to-top"><i class="fa fa-arrow-up"></i></a>   
+
+        
+    <!-- JavaScript Libraries -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/counterup/counterup.min.js"></script>
+    <script src="lib/lightbox/js/lightbox.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="formhandle.js"></script>    
+
+    <!-- Template Javascript -->
+    <script src="./js/main.js"></script>
+
+  
+
+    </body>
+
+</html>
