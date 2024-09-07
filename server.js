@@ -21,7 +21,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/bookingdata', {
 });
 const userSchema = new mongoose.Schema({
   name: { type: String, required: true },
-  email: { type: String, required: true },
+  email: { type: String, required: true },  
   phone: { type: Number, required: true },
   package: { type: String, required: true },
   date: { type: Date, required: true },
@@ -29,6 +29,17 @@ const userSchema = new mongoose.Schema({
 });
 
 const Users = mongoose.model("Users", userSchema);
+
+const contactSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  email: { type: String, required: true },
+  message: { type: String, required: true },
+  subject: { type: String, required: true },
+  phone: { type: Number, required: true },
+ 
+});
+
+const Contacts = mongoose.model("Contacts", contactSchema);
 
 // Serve HTML file
 app.get('/', (req, res) => {
@@ -68,8 +79,38 @@ app.post('/post', async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 });
+app.post('/contact', async (req, res) => {
+  try {
+    const { name, email, message , subject , phone  } = req.body;
+    
+    // Validate inputs
+    if (!name || !email || !message || !subject || !phone) {
+      return res.status(400).send("All fields are required");
+    }
 
-// Start Server
+    // Create a new contact submission
+    const contact = new Contacts({
+      name,
+      email,
+      message,
+      subject,
+      phone,
+     
+      
+      
+    });
+
+    // Save the contact submission to the database
+    await contact.save();
+    console.log(contact);
+    res.send("Contact submission successful");
+  } catch (err) {
+    console.error("Error saving contact submission:", err);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+
 app.listen(port, () => {
   console.log(`Server started at http://localhost:${port}`);
 });
