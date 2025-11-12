@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Waterpark Booking Analytics</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+  body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background: #f0f4f8;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative; /* Needed for absolute positioning of back button */
+  }
+  h1 {
+    margin-bottom: 10px;
+    color: #2c3e50;
+    font-weight: 700;
+  }
+
+  /* Back button - fixed top-left */
+  #backBtn {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    background: #3498db;
+    color: white;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.3s;
+    z-index: 1000;
+  }
+  #backBtn:hover {
+    background: #2980b9;
+  }
+
+  /* Navbar */
+  .navbar {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .nav-btn {
+    background: #3498db;
+    color: white;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s;
+    user-select: none;
+  }
+  .nav-btn:hover {
+    background: #2980b9;
+  }
+  .nav-btn.active {
+    background: #1abc9c;
+  }
+
+  /* Card container */
+  .card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
+    padding: 20px;
+    max-width: 420px;
+    width: 100%;
+  }
+
+  /* Summary box */
+  .summary {
+    margin-bottom: 10px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #34495e;
+  }
+
+  /* Canvas styles */
+  canvas {
+    width: 100% !important;
+    height: 270px !important;
+  }
+
+  /* Loader */
+  .loader {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+    margin: 40px auto;
+  }
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  /* Responsive */
+  @media (max-width: 480px) {
+    .card {
+      max-width: 90vw;
+      padding: 15px;
+    }
+  }
+</style>
+</head>
+<body>
+  <!-- Back to Dashboard Button fixed top-left -->
+  <button id="backBtn">← Back to Dashboard</button>
+
+  <h1>📊 Waterpark Booking Analytics</h1>
+
+  <div class="navbar">
+    <button class="nav-btn active" data-type="monthly">Month</button>
+    <button class="nav-btn" data-type="daily">Day</button>
+    <button class="nav-btn" data-type="timeslot">Timeslot</button>
+    <button class="nav-btn" data-type="package">Package</button>
+    <button class="nav-btn" data-type="insights">Insights</button>
+  </div>
+
+  <div class="card">
+    <div class="summary" id="summaryText">Loading...</div>
+    <canvas id="analyticsChart"></canvas>
+    <div id="loader" class="loader" style="display:none;"></div>
+  </div>
+
+<script>
+  const token = localStorage.getItem("adminToken"); // Your admin token
+
+  const summaryText = document.getElementById("summaryText");
+  const loader = document.getElementById("loader");
+  const ctx = document.getElementById("analyticsChart").getContext("2d");
+  let chart = null;
+
+  // Endpoints mapping for each data type
+  const endpoints = {
+    monthly: '/analytics/monthly',
+    daily: '/analytics/daily',
+    timeslot: '/analytics/timeslot',
+    package: '/analytics/package'
+  };
+
+  // Color palette for bars
+  const colors = [
+    "#1abc9c", "#3498db", "#9b59b6", "#e67e22", "#e74c3c",
+    "#2ecc71", "#f1c40f", "#34495e", "#7f8c8d", "#27ae60"
+  ];
+
+  async function fetchData(type) {
+    loader.style.display = "block";
+    summaryText.textContent = "Loading...";
+    if(chart) chart.destroy();
+
+    try {
+      const res = await fetch(endpoints[type], {
+        headers: { 'Authorization': 'Bearer ' + token }
+      });
+      if(!res.ok) throw new Error("Failed to fetch data");
+      const data = await res.json();
+
+      // Calculate total bookings
+      const total = data.reduce((acc, cur) => acc + cur.count, 0);
+
+      // Update summary
+      summaryText.textContent = `Total bookings (${type}): ${total}`;
+
+      // Render chart
+      renderChart(type, data);
+
+    } catch (e) {
+      summaryText.textContent = "Error loading data.";
+      console.error(e);
+    } finally {
+      loader.style.display = "none";
+    }
+  }
+
+  function renderChart(type, data) {
+    chart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: data.map(d => d._id),
+        datasets: [{
+          label: `Bookings per ${type}`,
+          data: data.map(d => d.count),
+          backgroundColor: colors,
+          borderRadius: 5,
+          borderSkipped: false
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: { stepSize: 1 },
+            title: { display: true, text: "Number of Bookings" }
+          },
+          x: {
+            title: { 
+              display: true, 
+              text: type === "timeslot" ? "Time Slots" : 
+                    type === "daily" ? "Day" : 
+                    type === "monthly" ? "Month" : 
+                    type === "package" ? "Package" : ""
+            }
+          }
+        },
+        plugins: {
+          legend: { display: false },
+          tooltip: { enabled: true }
+        }
+      }
+    });
+  }
+
+  // Handle navbar button clicks
+  document.querySelectorAll(".nav-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".nav-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      fetchData(btn.dataset.type);
+    });
+  });
+
+  // Load default chart on page load
+  fetchData("monthly");
+
+  // Back button event listener
+  document.getElementById('backBtn').addEventListener('click', () => {
+    window.location.href = 'admindash.html';
+  });
+</script>
+</body>
+</html>
